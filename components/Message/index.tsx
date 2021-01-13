@@ -1,4 +1,5 @@
 import useSWR from 'swr';
+import fetcher from '../../lib/fetcher';
 import ArrowNarrowRight from '../Icon/arrow-narrow-right';
 import Copy from '../Icon/copy';
 import Facebook from '../Icon/facebook';
@@ -38,8 +39,6 @@ function Skeleton() {
     </div>
   );
 }
-
-const fetcher = (args: any) => fetch(args).then((r) => r.json());
 
 export default function Message() {
   const { data, error, revalidate, isValidating } = useSWR<{
