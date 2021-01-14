@@ -7,6 +7,7 @@ import HappyFace from '../Icon/happy-face';
 import Loader from '../Icon/loader';
 import SadFace from '../Icon/sad-face';
 import Twitter from '../Icon/twitter';
+import Spinner from '../Spinner';
 
 function Error() {
   return (
@@ -78,11 +79,7 @@ export default function Message() {
           </div>
 
           <div className="flex flex-row items-center">
-            {isValidating && (
-              <div className="animate-spin mx-2">
-                <Loader width={23} height={23} />
-              </div>
-            )}
+            {isValidating && <Spinner />}
             <button onClick={() => fetchNew()}>
               <ArrowNarrowRight width={23} height={23} />
             </button>
