@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import fetcher from "../../lib/fetcher";
+import { Quote } from "../../types/Quote";
 import ArrowNarrowRight from "../Icon/arrow-narrow-right";
 import Copy from "../Icon/copy";
 import Facebook from "../Icon/facebook";
@@ -41,31 +42,38 @@ function Skeleton() {
 }
 
 export default function Message() {
-  const { data, error, revalidate, isValidating } = useSWR<{
-    text: string;
-    author: string;
-  }>("/api/random", fetcher, { revalidateOnFocus: false, refreshInterval: 0 });
-
-  function fetchNew() {
-    revalidate();
-  }
-
-  if (data) {
-    console.log(data);
-  }
+  const {
+    data: { randomQuote: data } = {},
+    error,
+    revalidate,
+    isValidating,
+  } = useSWR<{
+    randomQuote: Quote;
+  }>(
+    `{
+      randomQuote {
+        text
+        author {
+          name
+        }
+      }
+    }`,
+    fetcher,
+    { revalidateOnFocus: false, refreshInterval: 0 }
+  );
 
   return error ? (
     <Error />
   ) : (
     <>
-      {data && (
-        <div className="flex flex-row">
-          <div className="flex flex-1">
-            {isValidating ? (
-              <div className="w-full animate-pulse">
-                <div className="w-16 h-6 rounded-sm bg-gray-300 dark:bg-gray-400" />
-              </div>
-            ) : (
+      <div className="flex flex-row">
+        <div className="flex flex-1">
+          {isValidating ? (
+            <div className="w-full animate-pulse">
+              <div className="w-16 h-6 rounded-sm bg-gray-300 dark:bg-gray-400" />
+            </div>
+          ) : (
+            data && (
               <div className="flex flex-row -mx-1">
                 <div className="mx-1 hover:text-green-600 dark:hover:text-green-400">
                   <HappyFace width={23} height={23} />
@@ -74,17 +82,16 @@ export default function Message() {
                   <SadFace width={23} height={23} />
                 </div>
               </div>
-            )}
-          </div>
-
-          <div className="flex flex-row items-center">
-            {isValidating && <Spinner />}
-            <button onClick={() => fetchNew()}>
-              <ArrowNarrowRight width={23} height={23} />
-            </button>
-          </div>
+            )
+          )}
         </div>
-      )}
+        <div className="flex flex-row items-center">
+          {isValidating && <Spinner />}
+          <button onClick={() => revalidate()}>
+            <ArrowNarrowRight width={23} height={23} />
+          </button>
+        </div>
+      </div>
       <div className="pt-3">
         {isValidating ? (
           <Skeleton />
@@ -97,15 +104,13 @@ export default function Message() {
               <div className="flex flex-row items-center pt-5 ">
                 <div className="flex flex-1 mr-6 text-gray-500 dark:text-gray-400">
                   <p className="leading-snug text-sm md:text-md font-medium">
-                    {data.author}
+                    {data.author.name}
                   </p>
                 </div>
                 <div className="flex flex-row -mx-1 text-gray-800 dark:text-gray-200">
                   <div className="px-1">
                     <a
-                      href={`https://twitter.com/share?ref_src=twsrc%5Etfw&text=${encodeURI(
-                        data.text
-                      )}`}
+                      href={`https://twitter.com/share?ref_src=twsrc%5Etfw&text=`}
                       target="__blank"
                     >
                       <Twitter width={21} height={21} />
