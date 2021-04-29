@@ -1,13 +1,12 @@
-import useSWR from 'swr';
-import fetcher from '../../lib/fetcher';
-import ArrowNarrowRight from '../Icon/arrow-narrow-right';
-import Copy from '../Icon/copy';
-import Facebook from '../Icon/facebook';
-import HappyFace from '../Icon/happy-face';
-import Loader from '../Icon/loader';
-import SadFace from '../Icon/sad-face';
-import Twitter from '../Icon/twitter';
-import Spinner from '../Spinner';
+import useSWR from "swr";
+import fetcher from "../../lib/fetcher";
+import ArrowNarrowRight from "../Icon/arrow-narrow-right";
+import Copy from "../Icon/copy";
+import Facebook from "../Icon/facebook";
+import HappyFace from "../Icon/happy-face";
+import SadFace from "../Icon/sad-face";
+import Twitter from "../Icon/twitter";
+import Spinner from "../Spinner";
 
 function Error() {
   return (
@@ -45,7 +44,7 @@ export default function Message() {
   const { data, error, revalidate, isValidating } = useSWR<{
     text: string;
     author: string;
-  }>('/api/random', fetcher);
+  }>("/api/random", fetcher, { revalidateOnFocus: false, refreshInterval: 0 });
 
   function fetchNew() {
     revalidate();
