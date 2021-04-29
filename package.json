@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "npm run build:nexus-typegen && next build",
     "build:nexus-typegen": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' --transpile-only server/graphql/schema",
-    "start": "next start"
+    "start": "next start",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^2.21.2",
