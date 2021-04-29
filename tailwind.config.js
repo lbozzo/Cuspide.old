@@ -1,14 +1,15 @@
-const { fontFamily } = require('tailwindcss/defaultTheme');
-const colors = require('tailwindcss/colors');
+const { fontFamily } = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
 
 module.exports = {
-  purge: ['./pages/**/*.tsx', './components/**/*.tsx'],
-  darkMode: 'class', // or 'media' or 'class'
+  mode: "jit",
+  purge: ["./pages/**/*.tsx", "./components/**/*.tsx"],
+  darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', ...fontFamily.sans],
-        serif: ['Inter', ...fontFamily.serif],
+        sans: ["Inter", ...fontFamily.sans],
+        serif: ["Inter", ...fontFamily.serif],
       },
       colors: {
         gray: colors.blueGray,
