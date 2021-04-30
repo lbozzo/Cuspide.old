@@ -17,6 +17,7 @@ model Author {
 model Quote {
   id       Int                  @id @default(autoincrement())
   text     String
+  url      String?
   authorId Int
   author   Author               @relation(fields: [authorId], references: [id])
 }

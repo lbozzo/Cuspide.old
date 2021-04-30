@@ -11,6 +11,7 @@ import Spinner from "../Spinner";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { cloneElement, useState } from "react";
 import CheckCircle from "../Icon/check-circle";
+import Link from "next/link";
 
 function Error() {
   return (
@@ -58,6 +59,7 @@ export default function Message() {
     `{
       randomQuote {
         text
+        url
         author {
           name
         }
@@ -108,9 +110,12 @@ export default function Message() {
               </h1>
               <div className="flex flex-row items-center pt-5 ">
                 <div className="flex flex-1 mr-6 text-gray-500 dark:text-gray-400">
-                  <p className="leading-snug text-sm md:text-md font-medium">
+                  <a
+                    href={data.url}
+                    className="leading-snug text-sm md:text-md font-medium"
+                  >
                     {data.author.name}
-                  </p>
+                  </a>
                 </div>
                 <div className="flex flex-row -mx-1 text-gray-800 dark:text-gray-200">
                   <div className="px-1">

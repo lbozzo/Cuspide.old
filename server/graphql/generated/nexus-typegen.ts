@@ -38,6 +38,7 @@ export interface NexusGenObjects {
     author: NexusGenRootTypes['Author']; // Author!
     id: number; // Int!
     text: string; // String!
+    url?: string | null; // String
   }
 }
 
@@ -69,6 +70,7 @@ export interface NexusGenFieldTypes {
     author: NexusGenRootTypes['Author']; // Author!
     id: number; // Int!
     text: string; // String!
+    url: string | null; // String
   }
 }
 
@@ -90,6 +92,7 @@ export interface NexusGenFieldTypeNames {
     author: 'Author'
     id: 'Int'
     text: 'String'
+    url: 'String'
   }
 }
 
