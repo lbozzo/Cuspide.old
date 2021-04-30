@@ -1,3 +1,5 @@
-const fetcher = (args: any) => fetch(args).then((r) => r.json());
+import { request } from "graphql-request";
+
+const fetcher = (query: any) => request("/api/graphql", query);
 
 export default fetcher;
