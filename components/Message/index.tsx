@@ -3,7 +3,7 @@ import fetcher from "../../lib/fetcher";
 import { Quote } from "../../types/Quote";
 import ArrowNarrowRight from "../Icon/arrow-narrow-right";
 import Copy from "../Icon/copy";
-import Facebook from "../Icon/facebook";
+import DotsCircleHorizontal from "../Icon/dots-circle-horizontal";
 import HappyFace from "../Icon/happy-face";
 import SadFace from "../Icon/sad-face";
 import Twitter from "../Icon/twitter";
@@ -121,11 +121,31 @@ export default function Message() {
                     </a>
                   </div>
                   <div className="px-1">
-                    <Facebook width={21} height={21} />
-                  </div>
-                  <div className="px-1">
                     <Copy width={21} height={21} />
                   </div>
+                  {navigator.share && (
+                    <div className="px-1">
+                      <button
+                        onClick={async () => {
+                          try {
+                            await navigator.share({
+                              title: process.env.NEXT_PUBLIC_APP_NAME,
+                              text: `"${data.text}" - ${data.author.name}.`,
+                              url: window.location.href,
+                            });
+                          } catch (err) {
+                            console.error("Share failed:", err.message);
+                          }
+                        }}
+                      >
+                        <DotsCircleHorizontal
+                          width={21}
+                          height={21}
+                          aria-hidden={true}
+                        />
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </>
