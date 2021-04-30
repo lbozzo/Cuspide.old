@@ -126,6 +126,8 @@ export default function Message() {
                   {navigator.share && (
                     <div className="px-1">
                       <button
+                        aria-label="Copy to clipboard"
+                        title="Copy to clipboard"
                         onClick={async () => {
                           try {
                             await navigator.share({
