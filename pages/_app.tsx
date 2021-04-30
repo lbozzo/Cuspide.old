@@ -1,6 +1,6 @@
-import 'tailwindcss/tailwind.css';
-import Head from 'next/head';
-import { ThemeProvider } from 'next-themes';
+import "tailwindcss/tailwind.css";
+import Head from "next/head";
+import { ThemeProvider } from "next-themes";
 
 function MyApp({ Component, pageProps }) {
   return (
