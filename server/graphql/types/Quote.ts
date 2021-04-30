@@ -8,6 +8,7 @@ export const Quote = objectType({
   definition(t) {
     t.nonNull.int("id");
     t.nonNull.string("text");
+    t.string("url");
     t.nonNull.field("author", { type: Author });
   },
 });

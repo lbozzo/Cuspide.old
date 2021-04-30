@@ -21,4 +21,5 @@ type Quote {
   author: Author!
   id: Int!
   text: String!
+  url: String
 }
