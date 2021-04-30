@@ -8,6 +8,9 @@ import HappyFace from "../Icon/happy-face";
 import SadFace from "../Icon/sad-face";
 import Twitter from "../Icon/twitter";
 import Spinner from "../Spinner";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { cloneElement, useState } from "react";
+import CheckCircle from "../Icon/check-circle";
 
 function Error() {
   return (
@@ -42,6 +45,8 @@ function Skeleton() {
 }
 
 export default function Message() {
+  const [copied, setCopied] = useState(false);
+
   const {
     data: { randomQuote: data } = {},
     error,
@@ -121,13 +126,32 @@ export default function Message() {
                     </a>
                   </div>
                   <div className="px-1">
-                    <Copy width={21} height={21} />
+                    <CopyToClipboard
+                      text={`"${data.text}" - ${data.author.name}. Check out more motivational quotes at ${window.location.href} `}
+                      onCopy={() => {
+                        setCopied(true);
+                        setTimeout(() => {
+                          setCopied(false);
+                        }, 1150);
+                      }}
+                    >
+                      <span
+                        aria-label="Copy to Clipboard"
+                        title="Copy to clipboard"
+                      >
+                        {cloneElement(copied ? <CheckCircle /> : <Copy />, {
+                          width: 21,
+                          height: 21,
+                          "aria-hidden": true,
+                        })}
+                      </span>
+                    </CopyToClipboard>
                   </div>
                   {navigator.share && (
                     <div className="px-1">
                       <button
-                        aria-label="Copy to clipboard"
-                        title="Copy to clipboard"
+                        aria-label="Share"
+                        title="Share"
                         onClick={async () => {
                           try {
                             await navigator.share({
