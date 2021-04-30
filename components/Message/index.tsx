@@ -110,10 +110,14 @@ export default function Message() {
                 <div className="flex flex-row -mx-1 text-gray-800 dark:text-gray-200">
                   <div className="px-1">
                     <a
-                      href={`https://twitter.com/share?ref_src=twsrc%5Etfw&text=`}
+                      href={`https://twitter.com/intent/tweet?text=${encodeURI(
+                        `"${data.text}" - ${data.author.name}.\u000a${process.env.NEXT_PUBLIC_TWITTER_ACCOUNT} `
+                      )}&hashtags=${encodeURI(`motivation`)}`}
                       target="__blank"
+                      aria-label="Share on Twitter"
+                      title="Share on Twitter"
                     >
-                      <Twitter width={21} height={21} />
+                      <Twitter width={21} height={21} aria-hidden={true} />
                     </a>
                   </div>
                   <div className="px-1">
