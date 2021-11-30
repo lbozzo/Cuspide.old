@@ -4,28 +4,27 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run build:nexus-typegen && next build",
-    "build:nexus-typegen": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' --transpile-only server/graphql/schema",
-    "vercel-build": "prisma migrate deploy && next build",
+    "build": "next build",
     "start": "next start",
-    "postinstall": "prisma generate"
+    "lint": "next lint"
   },
   "dependencies": {
     "@prisma/client": "^2.21.2",
-    "apollo-server-micro": "^2.23.0",
+    "apollo-server-micro": "^3.5.0",
     "autoprefixer": "^10.2.5",
     "faker": "^5.1.0",
-    "graphql": "^15.5.0",
+    "graphql": "^16.0.1",
     "graphql-request": "^3.4.0",
+    "micro": "^9.3.4",
     "mongodb": "^3.6.3",
-    "next": "^10.2.0",
+    "next": "12",
     "next-themes": "^0.0.10",
     "nexus": "^1.0.0",
     "postcss": "^8.2.13",
-    "react": "17.0.1",
+    "react": "^17.0.2",
     "react-copy-to-clipboard": "^5.0.3",
-    "react-dom": "17.0.1",
-    "swr": "^0.5.5",
+    "react-dom": "^17.0.2",
+    "swr": "^1.1.0",
     "tailwindcss": "^2.1.2"
   },
   "devDependencies": {
@@ -33,7 +32,7 @@
     "@types/node": "^14.14.20",
     "@types/react": "^17.0.0",
     "@types/react-copy-to-clipboard": "^5.0.0",
-    "prisma": "^2.21.2",
+    "prisma": "^3.6.0",
     "ts-node-dev": "^1.1.6",
     "typescript": "^4.2.4"
   }
